@@ -2,7 +2,6 @@ import express from "express";
 import prisma from "./prisma/client";
 import ticketRouter from "./routes/ticketRoutes";
 import cors from "cors";
-import authRouter from "./routes/auth";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +14,6 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/tickets", ticketRouter);
-app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
