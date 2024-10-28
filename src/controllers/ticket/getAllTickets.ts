@@ -14,6 +14,7 @@ const getAllTicketsRoute = async (req: Request, res: Response) => {
     res.status(200).json({ success: true, data: tickets });
     return;
   } catch (error) {
+    console.log("ALSHDLJASHFLHASLDK:====  " + error);
     res.status(500).json({ success: false, message: (error as Error).message });
   }
 };

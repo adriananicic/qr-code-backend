@@ -1,5 +1,4 @@
 import express from "express";
-import prisma from "./prisma/client";
 import ticketRouter from "./routes/ticketRoutes";
 import cors from "cors";
 

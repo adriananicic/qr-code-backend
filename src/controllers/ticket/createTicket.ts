@@ -13,27 +13,27 @@ const createTicketRoute = async (req: Request, res: Response) => {
 
     const ticket = await createTicketService(vatin, firstName, lastName);
 
-    const qrCodeUrl = `${process.env.FRONTEND_URL}/tickets/${ticket.id}`;
-    const qrCodeImage = await QRCode.toDataURL(qrCodeUrl);
+    if (ticket) {
+      const qrCodeUrl = `${process.env.FRONTEND_URL}/tickets/${ticket.id}`;
+      const qrCodeImage = await QRCode.toDataURL(qrCodeUrl);
 
-    res.status(200).json({
-      success: true,
-      ticketId: ticket.id,
-      qrCode: qrCodeImage,
-      qrCodeUrl,
-    });
-  } catch (error) {
-    console.log(error);
-    if ((error as Error).message === "Max tickets exceeded") {
+      res.status(200).json({
+        success: true,
+        ticketId: ticket.id,
+        qrCode: qrCodeImage,
+        qrCodeUrl,
+      });
+    } else {
+      console.log("hary");
       res.status(400).json({
         success: false,
         message: "Maximum of 3 tickets allowed for this OIB",
       });
-    } else {
-      res
-        .status(500)
-        .json({ success: false, message: (error as Error).message });
     }
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({ success: false, message: "something went wrong" });
   }
 };
 

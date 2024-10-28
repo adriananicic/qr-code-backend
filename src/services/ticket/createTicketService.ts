@@ -9,8 +9,7 @@ const createTicketService = async (
     where: { vatin },
   });
 
-  if (numberOfTicketsWithVatin >= 3)
-    throw new Error("There are already 3 tickets created with this vatin");
+  if (numberOfTicketsWithVatin >= 3) return false;
 
   const ticket = await prisma.ticket.create({
     data: {

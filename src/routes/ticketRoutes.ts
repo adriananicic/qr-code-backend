@@ -10,7 +10,7 @@ const ticketRouter = express.Router();
 
 ticketRouter.get("/count", getNumberOfTickets);
 ticketRouter.get("/", checkAuthJwt, getAllTicketsRoute);
-ticketRouter.get("/:id", getTicketByIDRoute);
+ticketRouter.get("/:id", checkAuthJwt, getTicketByIDRoute);
 ticketRouter.post("/create", checkJwt, createTicketRoute);
 
 export default ticketRouter;
